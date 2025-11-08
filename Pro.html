@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FortuneX • Sign Up</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#8B1A1A;
+      --accent-2:#A52A2A;
+      --card-bg: rgba(7,4,4,0.75);
+      --input-bg: rgba(255,255,255,0.05);
+      --muted: #c9bfbf;
+      --text: #fff6f6;
+      --radius:12px;
+      --max-width:420px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: url('https://i.ibb.co/svqQzKD8/20251104-164223-3.jpg') center center / cover fixed no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      border-radius:18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .top {
+      padding:20px;
+      text-align:center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .top img { height:56px; display:block; margin:0 auto 8px }
+    .top h1 { font-size:18px; font-weight:700; color:#fff }
+
+    .panel {
+      padding:22px;
+      margin:18px 0;
+      background: var(--card-bg);
+      border-radius:18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .title { text-align:center; font-weight:800; font-size:18px; margin-bottom:12px; color:#fff }
+    .sub { text-align:center; color:var(--muted); font-size:0.95rem; margin-bottom:16px }
+
+    form { display:flex; flex-direction:column; gap:14px; }
+
+    .field { position:relative; width:100%; }
+    input, select {
+      width:100%;
+      padding:14px 14px;
+      border-radius:10px;
+      background:var(--input-bg);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.08);
+      outline:none;
+      font-size:0.96rem;
+    }
+    input::placeholder{ color:#a39797 }
+    input:focus { border-color: var(--accent); }
+
+    /* Eye icon toggle (button) */
+    .toggle-eye {
+      position:absolute;
+      right:8px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      color:#aaa;
+      background:transparent;
+      border:0;
+      padding:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+    }
+    .toggle-eye:focus { outline:2px solid rgba(255,255,255,0.12); }
+
+    .toggle-eye i {
+      font-size:1.05rem;
+      position:relative;
+      pointer-events:none;
+      color:inherit;
+    }
+
+    .note { font-size:0.85rem; color:var(--muted); margin-top:-6px; margin-bottom:8px; }
+
+    .proceed {
+      padding:14px;
+      background: linear-gradient(180deg,var(--accent),var(--accent-2));
+      color:#fff;
+      font-weight:800;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-size:1rem;
+      box-shadow: 0 10px 30px rgba(139,26,26,0.18);
+    }
+
+    .packages { display:none; gap:12px; }
+    .packages.active { display:flex; flex-direction:column; }
+
+    .pkg {
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.05);
+      position:relative;
+      margin-bottom:12px;
+    }
+    .pkg h3 { margin:0 0 6px 0; color:#fff; font-size:1.02rem }
+    .pkg p { color:var(--muted); font-size:0.95rem; margin:0 0 8px 0 }
+    .pkg .price { font-weight:800; color:#fff; margin-top:6px; font-size:1.02rem }
+    .badge {
+      position:absolute;
+      right:12px;
+      top:12px;
+      background:var(--accent);
+      color:#111;
+      padding:6px 8px;
+      border-radius:8px;
+      font-weight:700;
+      font-size:0.8rem;
+    }
+    .choose {
+      margin-top:10px;
+      width:100%;
+      padding:12px;
+      background:linear-gradient(180deg,var(--accent),var(--accent-2));
+      color:#fff;
+      font-weight:700;
+      border:0;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    /* optional visible back button inside packages panel (kept subtle for usability) */
+    .screen-back {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:12px;
+      color:var(--muted);
+      cursor:pointer;
+      background:transparent;
+      border:0;
+      padding:6px 8px;
+      border-radius:8px;
+    }
+    .screen-back:hover { color:#fff; }
+
+    .back-btn { display:none; }
+
+    .small { font-size:0.85rem; color:var(--muted); text-align:center; margin-top:10px }
+  </style>
+</head>
+<body>
+  <div class="">
+    <div class="top">
+      <img src="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png" alt="FortuneX logo">
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="panel" id="formScreen">
+      <div class="title">Create your account</div>
+      <div class="sub">Join FortuneX and start earning — fill all fields to continue</div>
+
+      <form id="signupForm" novalidate>
+        <div class="field">
+          <input id="fullName" name="fullName" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="field">
+          <input id="username" name="username" type="text" placeholder="Choose a username" required>
+        </div>
+        <div class="field">
+          <input id="email" name="email" type="email" placeholder="you@domain.com" required>
+        </div>
+        <div class="field">
+          <input id="phone" name="phone" type="tel" placeholder="08012345678" required>
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <input id="password" name="password" type="password" placeholder="Create a secure password" minlength="8" required aria-describedby="pwNote">
+          <button type="button" class="toggle-eye" id="togglePassword" aria-label="Show password" aria-pressed="false">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div id="pwNote" class="note">Minimum 8 characters</div>
+
+        <button type="button" class="proceed" id="proceedBtn">Proceed</button>
+        <div class="small">By proceeding you agree to our terms.</div>
+      </form>
+    </div>
+
+    <!-- Packages inside glass panel -->
+    <div class="panel packages" id="packageScreen" aria-hidden="true">
+      <button class="screen-back" id="inlineBackBtn" type="button" aria-label="Back to signup">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+      </button>
+
+      <div class="title" style="text-align:center">Select a package</div>
+
+      <div class="pkg">
+        <h3>FortuneX Starter</h3>
+        <p>Basic access to all earning categories — good for beginners and testing the platform.</p>
+        <div class="price">₦7,500</div>
+        <button class="choose" data-package="Starter" data-amount="7500">Choose Starter — ₦7,500</button>
+      </div>
+
+      <div class="pkg">
+        <div class="badge">Recommended💎</div>
+        <h3>FortuneX Plus</h3>
+        <p>Premium access with higher bonuses, faster growth, and more benefits.</p>
+        <div class="price">₦14,500</div>
+        <button class="choose" data-package="Plus" data-amount="14500">Choose Plus — ₦14,500</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://checkout.squadco.com/widget/squad.min.js"></script>
+
+  <script>
+    (function(){
+      const form = document.getElementById('signupForm');
+      const proceedBtn = document.getElementById('proceedBtn');
+      const formScreen = document.getElementById('formScreen');
+      const packageScreen = document.getElementById('packageScreen');
+      const chooseButtons = document.querySelectorAll('.choose');
+      const inlineBackBtn = document.getElementById('inlineBackBtn');
+      const whatsappNumber = '2349136339293';
+
+      // password show/hide toggle
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const toggleIcon = togglePasswordBtn.querySelector('i');
+      const passwordField = document.getElementById('password');
+
+      function setPasswordVisible(visible){
+        if(visible){
+          passwordField.type = 'text';
+          toggleIcon.classList.remove('fa-eye');
+          toggleIcon.classList.add('fa-eye-slash');
+          togglePasswordBtn.setAttribute('aria-label','Hide password');
+          togglePasswordBtn.setAttribute('aria-pressed','true');
+        } else {
+          passwordField.type = 'password';
+          toggleIcon.classList.remove('fa-eye-slash');
+          toggleIcon.classList.add('fa-eye');
+          togglePasswordBtn.setAttribute('aria-label','Show password');
+          togglePasswordBtn.setAttribute('aria-pressed','false');
+        }
+      }
+      setPasswordVisible(passwordField.type === 'text');
+      togglePasswordBtn.addEventListener('click', () => {
+        setPasswordVisible(passwordField.type !== 'text');
+        passwordField.focus({preventScroll:true});
+      });
+
+      // UI helpers to show/hide screens consistently
+      function showFormScreen() {
+        formScreen.style.display = 'block';
+        packageScreen.style.display = 'none';
+        packageScreen.classList.remove('active');
+        packageScreen.setAttribute('aria-hidden', 'true');
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+      function showPackageScreen(pushHistory = true) {
+        formScreen.style.display = 'none';
+        packageScreen.style.display = 'flex';
+        packageScreen.classList.add('active');
+        packageScreen.setAttribute('aria-hidden', 'false');
+        window.scrollTo({top:0,behavior:'smooth'});
+
+        // only push a new history entry when transition was initiated by the user action
+        if (pushHistory) {
+          // add a state so pressing the device/browser back button returns to the form
+          try {
+            history.pushState({screen:'packages'}, document.title, location.pathname + '#packages');
+          } catch(e){}
+        }
+      }
+
+      // initialize history state so popstate handling knows where we started
+      window.addEventListener('load', () => {
+        try {
+          // Ensure there's an initial state representing the form screen
+          history.replaceState({screen:'form'}, document.title, location.pathname);
+          // If the page was loaded with #packages (rare) show packages without pushing another state
+          if (location.hash === '#packages') {
+            showPackageScreen(false);
+          }
+        } catch(e){}
+      });
+
+      // When user clicks proceed, validate and move to packages and push history
+      proceedBtn.addEventListener('click', function(){
+        if(!form.checkValidity()){
+          form.reportValidity();
+          return;
+        }
+        showPackageScreen(true);
+      });
+
+      // inline visible back button (nice to have in UI)
+      inlineBackBtn.addEventListener('click', function(){
+        // navigate back in history so the device back button behavior stays consistent
+        if (history.state && history.state.screen === 'packages') {
+          history.back();
+        } else {
+          // fallback: directly show form
+          showFormScreen();
+          try { history.replaceState({screen:'form'}, document.title, location.pathname); } catch(e){}
+        }
+      });
+
+      // popstate: handle device/browser back button
+      window.addEventListener('popstate', function(event){
+        const state = event.state || {};
+        // If state.screen is 'packages' show packages, otherwise default to form
+        if (state.screen === 'packages') {
+          // user navigated to packages
+          showPackageScreen(false); // don't push history again
+        } else {
+          // default / null / form -> show form
+          showFormScreen();
+        }
+      });
+
+      chooseButtons.forEach(btn=>{
+        btn.addEventListener('click', function(){
+          const pkg = this.dataset.package;
+          const amount = Number(this.dataset.amount);
+          payWithSquad(pkg, amount);
+        });
+      });
+
+      function payWithSquad(packageName, amount){
+        const fullName=document.getElementById('fullName').value.trim();
+        const username=document.getElementById('username').value.trim();
+        const email=document.getElementById('email').value.trim();
+        const phone=document.getElementById('phone').value.trim();
+        if(!fullName||!username||!email||!phone){alert("Please fill all fields.");return;}
+        const metadata={fullName,username,email,phone,package:packageName};
+        const PUBLIC_KEY='PUBLIC_KEY_HERE';
+        const amountKobo=amount*100;
+        if(typeof SquadPay==='undefined' && typeof Squad!=='undefined'){window.SquadPay=window.Squad;}
+        SquadPay.open({
+          key:PUBLIC_KEY,
+          amount:amountKobo,
+          currency_code:'NGN',
+          email:email,
+          metadata:metadata,
+          callback:function(response){
+            const ref=response?.transaction_ref||response?.reference||'N/A';
+            const msg=`📝 FortuneX Signup
+Name: ${fullName}
+Username: ${username}
+Email: ${email}
+Phone: ${phone}
+Package: ${packageName}
+Amount: ₦${amount}
+Ref: ${ref}`;
+            window.location.href=`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+          },
+          onClose:function(){alert('Payment closed or cancelled.');},
+          onError:function(){alert('Payment failed. Try again.');}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

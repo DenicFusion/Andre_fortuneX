@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FortuneX Learn, earn and explore</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png">
+  <meta name="theme-color" content="#6e0a14">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #8b0e18;
+      --primary-600: #5c0a10;
+      --bg: #0f0708;
+      --card: #1a0b0c;
+      --muted: #e6d6d6;
+      --text: #fff6f6;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 12px;
+      --gap: 20px;
+      --notif-bg: rgba(25,10,10,0.86);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background-image: url('https://i.ibb.co/svqQzKD8/20251104-164223-3.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    a { color: var(--primary); text-decoration: none }
+    a:hover { color: var(--primary-600) }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1200;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(180deg, rgba(20,6,8,0.95), rgba(20,6,8,0.8));
+      padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    .logo img { height: 40px; width: 120px; object-fit: contain; display: block }
+    .nav-actions { display: flex; align-items: center; gap: 10px }
+    .signup-tight { margin-right: 6px }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px;
+      border-radius: 10px; background: linear-gradient(180deg, var(--primary), var(--primary-600));
+      color: #fff; border: none; font-weight: 600; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139,14,24,0.25);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:active { transform: translateY(1px) }
+    .menu-btn { display: flex; flex-direction: column; gap: 4px; background: none; border: 0; padding: 8px; cursor: pointer }
+    .menu-btn .line { width: 20px; height: 2px; background: var(--text); border-radius: 2px }
+
+    #menuOverlay {
+      position: absolute; top: 64px; right: 12px; background: var(--card); padding: 12px; border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: none; min-width: 160px; border: 1px solid rgba(255,255,255,0.03);
+    }
+    #menuOverlay.open { display: block }
+    #menuOverlay ul { list-style: none; margin: 0; padding: 0 }
+    #menuOverlay li { padding: 8px 0 }
+    #menuOverlay a { color: var(--text); font-weight: 600; font-size: 0.96rem }
+
+    /* Hero */
+    #hero-video { width: 100%; max-height: 58vh; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center }
+    #hero-video iframe { width: 100%; height: 360px; display: block; object-fit: cover }
+
+    .hero { padding: 48px 16px 32px; text-align: center; max-width: 1100px; margin: 0 auto }
+    .tag-small { color: var(--primary); font-weight: 700; font-size: 0.98rem; margin-bottom: 10px; display: block }
+    .tag-large { font-size: 2.2rem; font-weight: 800; line-height: 1.08; margin-bottom: 14px; color: #fff }
+    .hero p { max-width: 760px; margin: 0 auto 18px; color: var(--muted); font-size: 1rem }
+    .hero .actions { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 8px }
+    .get-start { background: linear-gradient(180deg, var(--primary), var(--primary-600)); color: #fff; padding: 10px 18px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer }
+
+    /* Image blocks */
+    .image-wrap { padding: 16px; max-width: 1100px; margin: 18px auto; background: var(--glass); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.02) }
+    .content-image { width: 100%; height: auto; border-radius: 10px; background: #0b0b0b; min-height: 200px; object-fit: cover; display: block }
+    .image-caption { margin-top: 12px; padding: 0 6px }
+    .image-caption h4 { font-size: 1.02rem; font-weight: 700; color: #fff; margin-bottom: 8px }
+    .image-caption p { color: var(--muted); font-size: 0.97rem; white-space: pre-wrap }
+
+    /* Features */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; padding: 36px 16px; max-width: 1200px; margin: 0 auto }
+    .feature-card { background: var(--card); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 8px 30px rgba(0,0,0,0.5); text-align: center; }
+    .feature-card i { font-size: 1.6rem; color: var(--primary); display: block; margin-bottom: 12px }
+    .feature-card h3 { font-size: 1.02rem; margin-bottom: 8px; color: #fff; font-weight: 700 }
+    .feature-card p { color: var(--muted); font-size: 0.95rem }
+
+    /* FAQ */
+    #faq { padding: 32px 16px }
+    #faq h2 { text-align: center; font-size: 1.6rem; margin-bottom: 18px; color: #fff }
+    .accordion { max-width: 760px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.03) }
+    .accordion-item { border-bottom: 1px solid rgba(255,255,255,0.03) }
+    .accordion-item button { width: 100%; padding: 14px; background: none; border: 0; color: var(--text); font-size: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer }
+    .accordion-item .content { display: none; padding: 0 12px 16px; color: var(--muted) }
+
+    /* Footer */
+    footer { margin-top: 28px; background: var(--card); padding: 28px 16px; border-top: 1px solid rgba(255,255,255,0.03) }
+    .footer-nav { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px }
+    .social-icons { display: flex; gap: 12px; justify-content: center; margin-bottom: 12px }
+    .copyright { color: var(--muted); text-align: center; font-size: 0.92rem }
+
+    /* Scroll top */
+    #scrollTop { position: fixed; right: 18px; bottom: 20px; width: 44px; height: 44px; border-radius: 50%; background: var(--primary); display: none; align-items: center; justify-content: center; color: #fff; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.45) }
+
+    /* Notifications */
+    .reg-notif-wrap { position: fixed; right: 12px; top: 72px; display: flex; flex-direction: column; gap: 10px; z-index: 14000; pointer-events: none; align-items: flex-end; }
+    .reg-notif { display: flex; align-items: center; gap: 12px; background: var(--notif-bg); color: var(--text); padding: 10px 12px; border-radius: 12px; min-width: 220px; max-width: 360px; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(-12px) scale(0.98); opacity: 0; transition: transform 330ms, opacity 330ms ease; font-size: 0.95rem; }
+    .reg-notif.show { transform: translateY(0) scale(1); opacity: 1; }
+    .reg-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-600)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #111; }
+    .reg-body { flex: 1 }
+    .reg-title { font-weight: 700; color: #fff; font-size: 0.95rem }
+    .reg-meta { color: var(--muted); font-size: 0.86rem }
+    .reg-close { background: transparent; border: 0; color: var(--muted); cursor: pointer; padding: 6px; border-radius: 8px; font-size: 0.9rem }
+
+    @media (max-width: 760px) {
+      .hero { padding: 24px 12px 18px }
+      .tag-large { font-size: 1.6rem }
+      header { padding: 10px }
+      #menuOverlay { right: 8px }
+      .content-image { min-height: 140px }
+      .reg-notif-wrap { top: 20vh; right: 8px }
+      .reg-notif { width: calc(100% - 20px); max-width: none }
+    }
+  </style>
+</head>    
+<body>    
+  <header>    
+    <div class="logo"><img src="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png" alt="Nexa Logo"></div>    
+    <div class="nav-actions">    
+      <div class="signup-tight">    
+        <button class="btn" onclick="location.href='signup.html'">Sign Up</button>    
+      </div>    
+      <button id="menuBtn" class="menu-btn" aria-label="Open menu">    
+        <span class="line"></span><span class="line"></span><span class="line"></span>    
+      </button>    
+    </div>    
+    <div id="menuOverlay" aria-hidden="true">    
+      <ul>    
+        <li><a href="#hero">Home</a></li>    
+        <li><a href="#features">Features</a></li>    
+        <li><a href="#faq">FAQ</a></li>    
+        <li><a href="signup.html">Sign Up</a></li>    
+        <li><a href="terms.html">Terms</a></li>    
+        <li><a href="privacy.html">Privacy</a></li>    
+      </ul>    
+    </div>    
+  </header>    
+    <!-- Hero -->
+  <section class="hero" id="hero">
+    <span class="tag-small"></span>
+    <h1 class="tag-large">Join the Movement. Live the Fortune.</h1>
+    <p>Earn rewards for every idea, every click, every engagement, and every minute. Connect with global brands, access elite digital assets — from virtual estates and rare collectibles to shares and creative royalties — all while mastering next-generation digital skills.
+</p>
+  
+  <div class="reg-notif-wrap" id="notifWrap" aria-live="polite"></div>    
+
+  <div class="video-wrap" style="display:flex; justify-content:center; align-items:center; width:100%; padding:10px;">    
+    <div class="video-embed" style="position:relative; width:100%; max-width:500px; aspect-ratio:20/14;">    
+      <iframe src="https://player.vimeo.com/video/1124222790" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%; height:100%; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.4);"></iframe>    
+    </div>    
+  </div>    
+</body>    
+</html>
+    <div class="actions">
+      <button class="get-start" onclick="location.href='signup.html'">Get Started</button>
+    </div>
+
+
+    <!-- FIRST IMAGE: after Get Started (static) -->
+    <div class="image-wrap" id="image-hero-info" style="margin-top:18px">
+      <img src="https://i.ibb.co/0pFMLzq1/20251107-161101.jpg" alt="How FortuneX works" class="content-image">
+      <div class="image-caption">
+        <h4>HOW FortuneX WORKS</h4>
+        <p>FortuneX is a digital earning platform that turns your everyday online activities into real income. Whether you’re watching videos, chatting, posting, learning, or engaging on social media — every move you make counts and earns you rewards.
+
+It’s simple: stay active, complete daily tasks, and cash out instantly. No stress, no delays — just fun, creativity, and consistency that pay off. With FortuneX, your time online finally starts working for you. 🚀
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="feature-card">
+      <i class="fas fa-shop" aria-hidden="true"></i>
+      <h3>FortuneX MarketPlace</h3>
+      <p>🛍️Buy, sell, and earn effortlessly! Post your products, connect with real buyers, and get rewarded for every transaction. On FortuneX Marketplace, every deal drops cash — it’s where hustle meets profit!</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="fas fa-dice" aria-hidden="true"></i>
+      <h3>Casino Thrills</h3>
+      <p>Spin, flip, and win! Play exciting games, test your luck, and cash out real rewards. Every move brings instant excitement and profit.</p>
+    </div>    <div class="image-wrap" id="image-coin-hub">
+      <img src="https://i.ibb.co/JjNLwK0x/20251107-161215.jpg" alt="Coin Hub" class="content-image">
+      <div class="image-caption">
+        <h4>FortuneX Universal</h4>
+        <p>FortuneX is a global earning platform built to help individuals grow financially through different earning systems and opportunities. It offers users a smooth and affordable way to start earning, promoting, and achieving success no matter where they are.
+
+FortuneX features two main packages — FortuneX Starter and FortuneX Plus. The Starter plan allows anyone to begin easily and earn from every action, while the Plus package is designed for promoters who want to earn faster and bigger through higher bonuses and rewards.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="image-wrap" id="image-coin-hub">
+      <img src="https://i.ibb.co/cK6wt74f/20251107-161219.jpg" alt="Coin Hub" class="content-image">
+      <div class="image-caption">
+        <h4>FortuneX Starter</h4>
+        <p>Kick-off your FortuneX journey with confidence!
+FortuneX Starter gives everyone the chance to start small and grow big. You’ll never miss any slot or opportunity again — every action counts! Designed for affordability and accessibility, it’s the perfect way to step into the FortuneX world and begin earning steadily. 🚀🔥
+
+        </p>
+      </div>
+    </div>
+    <div class="image-wrap" id="image-coin-hub">
+      <img src="https://i.ibb.co/dsdDYhgT/20251107-161221.jpg" alt="Coin Hub" class="content-image">
+      <div class="image-caption">
+        <h4>FortuneX Plus</h4>Take it to the next level with FortuneX Plus — designed for promoters and ambitious earners.
+This package is your fast track to higher rewards, massive commissions, and greater recognition. FortuneX Plus is not just an upgrade; it’s the ladder that lifts you to financial breakthroughs and long-term success. 💃💰
+        <p>
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <i class="fas fa-film" aria-hidden="true"></i>
+      <h3>Watch & Earn</h3>
+      <p>Laugh your way to earnings! Watch trending skits, funny clips, and stand-up videos — and get paid for every view. On FortuneX, even your laughter earns you real money!</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="fas fa-headset" aria-hidden="true"></i>
+      <h3>FortuneX Sound</h3>
+      <p>Listen, vibe, and earn! Every song you play or rate rewards you instantly. Your playlist isn’t just for fun — it’s your new payslip.
+</p>
+    </div>
+    
+        <div class="image-wrap" id="image-loan-chest">
+      <img src="https://i.ibb.co/rf4yK6C3/20251107-161103.jpg" alt="Bot" class="content-image">
+      <div class="image-caption">
+        <h4>Automated Time Earnings</h4>Time is money, but most people just spend theirs. On FortuneX, you earn from it.
+
+Spend 15 mins on the site — ₦3,000
+30 mins — ₦6,000
+1 hour — ₦12,000
+
+This isn’t hustle. This is smart living.
+Every second you spend scrolling should pay you — and FortuneX just made that real.
+        <p></p>
+      </div>
+    </div>
+
+    <div class="image-wrap" id="image-loan-chest">
+      <img src="https://i.ibb.co/N6ys1dbp/20251107-161112.jpg" alt="Loan Chest" class="content-image">
+      <div class="image-caption">
+        <h4>FortuneX Monetization</h4>We flipped the script — your activity now pays.
+Every click, post, and move online counts.
+
+No stress. No delay.
+Real-time rewards for staying active.
+
+The system tracks your energy and turns it into money.
+If you show up daily, FortuneX shows out for you.
+Your activeness is your power.
+Your time is your fortune.
+        <p></p>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <i class="fas fa-bank" aria-hidden="true"></i>
+      <h3>FortuneX Payday</h3>
+      <p>Payday on FortuneX is fast and reliable — once you hit the minimum balance, you can withdraw easily, and your earnings are processed instantly to your account.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="fas fa-globe" aria-hidden="true"></i>
+      <h3>Global opportunities</h3>
+      <p>FortuneX operates worldwide — accessible in multiple languages like English, Spanish, Arabic, Chinese, and French.
+No language barriers. No limits.
+FortuneX — opportunity for everyone.</p>
+    </div>
+  </section>
+
+  <!-- Third image before FAQ -->
+  <section id="pre-faq-image" class="image-wrap">
+    <img src="https://i.ibb.co/r2qJ9Gky/20251107-161126.jpg" alt="Why Nexa" class="content-image">
+    <div class="image-caption">
+      <h4>Cook. Teach. Get Paid.</h4>
+      <p>Your recipe isn’t just food — it’s money.
+Share your local dishes, teach others, and turn your skills into income.
+Your culture. Your recipe. Your bag.
+      </p>
+    </div>
+  </section>
+  
+    <!-- Third image before FAQ -->
+  <section id="pre-faq-image" class="image-wrap">
+    <img src="https://i.ibb.co/1xz8dM6/20251107-161217.jpg" alt="Why Nexa" class="content-image">
+    <div class="image-caption">
+      <h4>Telegram Monetization</h4>
+      <p>Turn your Telegram activity into money.
+
+Create and connect your Telegram account with FortuneX
+Join discussions and earn
+Share posts and earn per post
+FortuneX — where even your chats pay.
+      </p>
+    </div>
+  </section>
+  
+    <!-- Third image before FAQ -->
+  <section id="pre-faq-image" class="image-wrap">
+    <img src="https://i.ibb.co/83xkchR/20251107-161122.jpg" alt="Why Nexa" class="content-image">
+    <div class="image-caption">
+      <h4>Social Streak = Payday</h4>
+      <p>Every like, share, and post pays.
+FortuneX turns your social activity into income.
+Keep your streak alive — let your activity print cash.
+No dull days. No wasted clicks.
+Just hustle → streaks→ payday.
+      </p>
+    </div>
+  </section>
+  
+    <section id="pre-faq-image" class="image-wrap">
+    <img src="https://i.ibb.co/Nn1pCjhL/20251107-161202.jpg" alt="Why Nexa" class="content-image">
+    <div class="image-caption">
+      <h4>K-Drama Reviews</h4>
+      <p>Share your favorite moments and reviews — and get rewarded.
+Turn your passion for K-Drama into daily earnings.
+Join FortuneX today and monetize your love for entertainment.
+<h4>FortuneX?</h4>
+<ul style="list-style: none; padding-left: 0;">
+  <li>▣ Real-Time Rewards</li>
+  <li>▣ Earn as you engage</li>
+  <li>▣ Commissions Earnings</li>
+  <li>▣ Every action pays</li>
+</ul>
+
+      </p>
+    </div>
+  </section><!-- FAQ -->
+<section id="faq" style="padding:40px 20px; color:#fff; background:linear-gradient(180deg, #1a0000, #330000);">
+  <h2 style="text-align:center; margin-bottom:25px; font-size:1.8rem; color:#FFD700;">Frequently Asked Questions</h2>
+  <div class="accordion" style="max-width:700px; margin:0 auto;">
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        What is FortuneX and how does it work? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <ul style="list-style:disc; padding-left:20px; margin:0;">
+          <li>FortuneX rewards you for daily digital actions — watching, playing, trading, and engaging.</li>
+          <li>Register, activate your account, and access the FortuneX dashboard to start earning instantly.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        How do I earn on FortuneX? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <ul style="list-style:disc; padding-left:20px; margin:0;">
+          <li>Watch and earn from FortuneX Comedy, Music, and Casino sections.</li>
+          <li>Trade and profit in the FortuneX Forex zone.</li>
+          <li>Earn from referrals, daily logins, and marketplace activities.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        How do I withdraw my FortuneX earnings? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <p>
+          Withdrawals are processed directly from your FortuneX dashboard. Link your valid bank account or preferred payout method, select your amount, and confirm. Payouts are reviewed and processed within a few business days depending on verification and your withdrawal method.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        Is FortuneX available in my country? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <p>
+          FortuneX is available across several African countries and expanding globally. During registration, you’ll see supported countries and payment options. If your country isn’t listed yet, stay tuned for updates on new launches.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        Are earnings guaranteed on FortuneX? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <p>
+          Earnings depend on your activity — watching, trading, or completing tasks. While there are many ways to earn, individual results vary. Stay active and consistent to maximize rewards.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        What does registration include? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <p>
+          Registration fee: ₦8,500 — includes welcome cashback, access to all earning sections, referral structure, and bonus incentives.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item" style="margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1);">
+      <button onclick="toggleFaq(this)" style="width:100%; text-align:left; background:none; border:none; color:#fff; font-size:1rem; padding:15px 10px; display:flex; justify-content:space-between; align-items:center;">
+        Do I need referrals to earn? <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="content" style="display:none; padding:0 10px 15px 10px; color:#ddd;">
+        <p>
+          No — referrals boost income but you can still earn by watching, playing, or trading on your own.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('i');
+    const isOpen = content.style.display === "block";
+    document.querySelectorAll('.accordion .content').forEach(el => el.style.display = "none");
+    document.querySelectorAll('.accordion button i').forEach(i => i.style.transform = "rotate(0deg)");
+    if (!isOpen) {
+      content.style.display = "block";
+      icon.style.transform = "rotate(180deg)";
+    }
+  }
+</script>
+
+  <!-- Footer -->
+  <footer>
+    <nav class="footer-nav">
+      <a href="#hero">Home</a><a href="#features">Features</a><a href="#faq">FAQ</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a>
+    </nav>
+
+    <div class="social-icons">
+      <a href="https://t.me/nexa_support" target="_blank" rel="noopener"><i class="fab fa-telegram-plane"></i></a>
+      <a href="https://www.tiktok.com/@nexa" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.facebook.com/nexa" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/nexa" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <div class="copyright">© 2025 FortuneX. All rights reserved.</div>
+  </footer>
+
+  <div id="scrollTop" title="Back to top">↑</div>
+
+  <script>
+    // Menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    if (menuBtn && menuOverlay) menuBtn.addEventListener('click', () => menuOverlay.classList.toggle('open'));
+
+    // FAQ accordion
+    function toggleFaq(btn){
+      document.querySelectorAll('.accordion-item').forEach(item=>{
+        const content = item.querySelector('.content');
+        if(item.contains(btn)){
+          const open = content.style.display === 'block';
+          content.style.display = open ? 'none' : 'block';
+          const icon = btn.querySelector('i');
+          if(icon){ icon.classList.toggle('fa-chevron-up', !open); icon.classList.toggle('fa-chevron-down', open); }
+        } else {
+          const c = item.querySelector('.content');
+          if(c) c.style.display = 'none';
+          const icon = item.querySelector('i'); if(icon){ icon.classList.remove('fa-chevron-up'); icon.classList.add('fa-chevron-down'); }
+        }
+      });
+    }
+
+    // Scroll-to-top
+    const scrollTop = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if (!scrollTop) return;
+      scrollTop.style.display = window.scrollY > 240 ? 'flex' : 'none';
+    });
+    if (scrollTop) scrollTop.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+    /* ------------- Registration notifications (top-right) -------------- */
+    (function(){
+      const notifWrap = document.getElementById('notifWrap');
+      const demoNames = ["Sandra","Chigozie","Blessing","Ibrahim","Tina","Emeka","Ngozi","Maryann","Ada","Joshua","Solomon","Grace"];
+
+      function createNotif(name, timeLabel){
+        const el = document.createElement('div');
+        el.className = 'reg-notif';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'reg-avatar';
+        avatar.textContent = (name || '?').charAt(0).toUpperCase();
+
+        const body = document.createElement('div');
+        body.className = 'reg-body';
+
+        const title = document.createElement('div');
+        title.className = 'reg-title';
+        // ALWAYS say Nexa (as requested)
+        title.textContent = `${name} just registered for Fort_X Plus`;
+
+        const meta = document.createElement('div');
+        meta.className = 'reg-meta';
+        meta.textContent = timeLabel;
+
+        body.appendChild(title);
+        body.appendChild(meta);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'reg-close';
+        closeBtn.setAttribute('aria-label','Dismiss');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          hideNotif(el);
+        });
+
+        el.appendChild(avatar);
+        el.appendChild(body);
+        el.appendChild(closeBtn);
+
+        return el;
+      }
+
+      function showNotif(el, autoHide = true){
+        notifWrap.prepend(el);
+        requestAnimationFrame(()=> el.classList.add('show'));
+        if (autoHide){
+          el._hideTimeout = setTimeout(()=> hideNotif(el), 4500);
+        }
+        if (notifWrap.children.length > 4){
+          const oldest = notifWrap.lastElementChild;
+          hideNotif(oldest);
+        }
+      }
+
+      function hideNotif(el){
+        if (!el) return;
+        el.classList.remove('show');
+        if (el._hideTimeout){ clearTimeout(el._hideTimeout); el._hideTimeout = null; }
+        setTimeout(()=> { try { el.remove(); } catch(e){} }, 350);
+      }
+
+      function randomTimeLabel(){
+        const options = ["just now","1 minute ago","2 minutes ago"];
+        return options[Math.floor(Math.random()*options.length)];
+      }
+
+      // console helper for quick testing
+      window._nexa_show_demo_notif = function(){
+        const name = demoNames[Math.floor(Math.random()*demoNames.length)];
+        const el = createNotif(name, randomTimeLabel());
+        showNotif(el);
+      };
+
+      // auto demo: show a registration notification every ~7s (remove interval in production)
+      const demoInterval = setInterval(()=> {
+        window._nexa_show_demo_notif();
+      }, 7000);
+
+      // For server-driven pushes: window.nexa_push_notification({ name: 'User', when: 'just now' })
+      window.nexa_push_notification = function(payload){
+        const name = payload.name || 'New user';
+        const when = payload.when || 'just now';
+        const el = createNotif(name, when);
+        showNotif(el);
+      };
+
+    })();
+  </script>
+
+  <!-- Background image load check -->
+  <script>
+  (function(){
+    const imgUrl = 'https://i.ibb.co/Mk1DZzbw/depositphotos-40189723-stock-photo-purple-background-1.webp';
+    const img = new Image();
+    img.onload = () => console.info('Background image loaded OK:', imgUrl);
+    img.onerror = (e) => console.error('Background image failed to load:', imgUrl, e);
+    img.src = imgUrl;
+  })();
+  </script>
+</body>
+</html>
