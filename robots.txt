@@ -1,5 +1,3 @@
 User-agent: *
-Disallow:
-
-# Point to the sitemap so crawlers can find your pages quickly
+Allow: /
 Sitemap: https://www.fortunexjobs.online/sitemap.xml
